@@ -29,35 +29,28 @@ const submit = () => {
     <Head title="Secure Area" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your password before continuing.
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <h2>Secure Area</h2>
+                <p>This is a secure area of the application. Please confirm your password before continuing.</p>
+            </div>
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    ref="passwordInput"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="current-password"
-                    autofocus
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
+        <form @submit.prevent="submit" class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" v-model="form.password">
+                </div>
             </div>
 
-            <div class="flex justify-end mt-4">
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Confirm
-                </PrimaryButton>
+            <div class="col-12">
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-secondary w-100" :disabled="form.processing">CONFIRM</button>
+                </div>
             </div>
+
         </form>
     </AuthenticationCard>
 </template>

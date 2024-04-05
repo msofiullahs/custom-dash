@@ -22,41 +22,41 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
     <Head title="Email Verification" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <h2>Email Verification</h2>
+                <p>Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.</p>
+                <p v-if="verificationLinkSent">A new verification link has been sent to the email address you provided in your profile settings.</p>
+            </div>
         </div>
 
-        <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600">
-            A new verification link has been sent to the email address you provided in your profile settings.
-        </div>
+        <form @submit.prevent="submit" class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-secondary w-100" :disabled="form.processing">Resend Verification Email</button>
+            </div>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </PrimaryButton>
-
-                <div>
-                    <Link
-                        :href="route('profile.show')"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <Link
+                            :href="route('profile.show')"
+                            class="text-success"
+                        >
                         Edit Profile</Link>
-
-                    <Link
-                        :href="route('logout')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ms-2"
-                    >
-                        Log Out
-                    </Link>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <Link
+                            :href="route('logout')"
+                            method="post"
+                            as="button"
+                            class="text-danger"
+                        >
+                        Logout</Link>
+                    </div>
                 </div>
             </div>
+
         </form>
     </AuthenticationCard>
 </template>
