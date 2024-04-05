@@ -30,61 +30,57 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Log in" />
+    <Head title="Sign in" />
 
     <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
+        <div class="row">
+            <div v-if="status" class="col-12 mb-4 font-medium text-sm text-green-600">
+                {{ status }}
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <h2>Sign In</h2>
+                <p>Enter your email and password to login</p>
+            </div>
         </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-                <InputError class="mt-2" :message="form.errors.email" />
+        <form @submit.prevent="submit" class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" v-model="form.email">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" v-model="form.password">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <div class="form-check form-check-primary form-check-inline">
+                        <Checkbox v-model:checked="form.remember" name="remember" class="form-check-input me-3" id="form-check-default" />
+                        <label class="form-check-label" for="form-check-default">
+                            Remember me
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="current-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox v-model:checked="form.remember" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
+            <div class="col-12">
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-secondary w-100" :disabled="form.processing">SIGN IN</button>
+                </div>
             </div>
         </form>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center">
+                    <p class="mb-0">Forgot your password? <a v-if="canResetPassword" :href="route('password.request')" class="text-warning">Reset here!</a></p>
+                </div>
+            </div>
+        </div>
     </AuthenticationCard>
 </template>

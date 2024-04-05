@@ -1,6 +1,10 @@
-import _ from 'lodash';
-window._ = _;
-import * as bootstrap from bootstrap
+import loadash from 'lodash';
+window._ = loadash;
+
+import * as Popper from '@popperjs/core';
+window.Popper = Popper;
+
+import 'bootstrap';
 
 import axios from 'axios';
 window.axios = axios;
